@@ -199,7 +199,7 @@ for_window [window_role="task_dialog"] floating enable
 for_window [class="yakuake"] floating enable
 for_window [class="kruler"] floating enable
 for_window [class="systemsettings"] floating enable
-for_window [class="plasmashell"] floating enable;
+for_window [class="plasmashell"] floating enable
 for_window [class="Plasma"] floating enable; border none
 for_window [title="plasma-desktop"] floating enable; border none
 for_window [title="win7"] floating enable; border none
@@ -208,7 +208,7 @@ for_window [class="Kmix"] floating enable; border none
 for_window [class="Klipper"] floating enable; border none
 for_window [class="Plasmoidviewer"] floating enable; border none
 for_window [class="(?i)*nextcloud*"] floating disable
-for_window [class="plasmashell" window_type="notification"] border none, move right 700px, move down 450px
+for_window [class="plasmashell" window_type="notification"] border none #, move right 700px, move down 450px
 no_focus [class="plasmashell" window_type="notification"]
 
 for_window [title="Desktop — Plasma"] kill; floating enable; border none
@@ -221,7 +221,7 @@ exec_always --no-startup-id wal -i /home/morro/Immagini/wallpapers/Minimal-Wallp
 # exec_always --no-startup-id picom -bc
 
 # Disable window titlebars entirely
-for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 5
 
 # Set inner/outer gaps
 gaps inner 20
@@ -238,7 +238,7 @@ gaps inner 20
 
 # Smart borders (draw borders around container only if it is not the only container on this workspace)
 # on|no_gaps (on=always activate and no_gaps=only activate if the gap size to the edge of the screen is 0)
-# smart_borders on
+smart_borders on
 
 # Press $mod+Shift+g to enter the gap mode. Choose o or i for modifying outer/inner gaps. Press one of + / - (in-/decrement for current workspace) or 0 (remove gaps for current workspace). If you also press Shift with these keys, the change will be global for all workspaces.
 set $mode_gaps Gaps: (o) outer, (i) inner
@@ -278,8 +278,14 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
+# <colorclass> <border> <background> <text> <indicator> <child_border>
+
 # client.focused #555555 #555555 #ffffff #2e9ef4     #CC0000
-client.focused #555555 #555555 #555555 #555555 #555555
+client.focused #00000000 #00000000 #00000000 
+client.focused_inactive #00000000 #00000000 #00000000 
+client.unfocused #00000000 #00000000 #00000000
+# client.urgent  #00000000 #00000000 #00000000 #00000000 #00000000         
+# client.placeholder #00000000 #00000000 #00000000 #00000000 #00000000
 
 border_radius 5
 
@@ -290,5 +296,5 @@ for_window [class=".*"] split toggle
 #kill command resets the split
 # bindsym $mod+shift+q split toggle kill 
 # should already exist but use if split orientation  messes up
-# bindsym $mod+e layout toggle split 
+bindsym $mod+x layout toggle split 
 
