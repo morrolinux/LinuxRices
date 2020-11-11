@@ -26,7 +26,6 @@ font pango:monospace 12
 # xss-lock grabs a logind suspend inhibit lock and will use i3lock to lock the
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
-exec_always picom -CG
 
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
@@ -89,7 +88,7 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+# bindsym $mod+s layout stacking
 bindsym $mod+w layout tabbed
 bindsym $mod+Alt+e layout toggle split
 
@@ -181,16 +180,16 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
-	position top
+	id bar-1
         mode hide
+        status_command i3status 
+	position top
 	modifier $mod
         height 26
         colors {
           background #242424
         }
 }
-
 
 # Plasma compatibility improvements
 for_window [window_role="pop-up"] floating enable
@@ -208,10 +207,9 @@ for_window [class="Kmix"] floating enable; border none
 for_window [class="Klipper"] floating enable; border none
 for_window [class="Plasmoidviewer"] floating enable; border none
 for_window [class="(?i)*nextcloud*"] floating disable
-for_window [class="plasmashell" window_type="notification"] border none, move right 700px, move down 450px
-no_focus [class="plasmashell" window_type="notification"]
-
+for_window [class="plasmashell" window_type="notification"] floating enable, border none, move right 700px, move down 450px
 for_window [title="Desktop — Plasma"] kill; floating enable; border none
+no_focus [class="plasmashell" window_type="notification"] 
 
 exec_always export BG="/home/morro/Immagini/wallpapers/minimal-sunset-landscape-4k-w5.jpg"
 exec_always --no-startup-id wal -i /home/morro/Immagini/wallpapers/Minimal-Wallpaper-001.jpg
@@ -219,6 +217,7 @@ exec_always --no-startup-id wal -i /home/morro/Immagini/wallpapers/Minimal-Wallp
 # exec --no-startup-id wal -i /home/morro/Immagini/wallpapers/358221b85dc0c666cbd6bf4961a260db.jpg
 
 # exec_always --no-startup-id picom -bc
+exec_always picom -CG
 
 # Disable window titlebars entirely
 for_window [class="^.*"] border pixel 0
@@ -278,6 +277,9 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
+workspace $ws1 output DP-4
+workspace $ws2 output HDMI-0
+
 # client.focused #555555 #555555 #ffffff #2e9ef4     #CC0000
 client.focused #555555 #555555 #555555 #555555 #555555
 
@@ -292,3 +294,4 @@ for_window [class=".*"] split toggle
 # should already exist but use if split orientation  messes up
 # bindsym $mod+e layout toggle split 
 
+bindsym $mod+Tab exec --no-startup-id skippy-xd
