@@ -295,3 +295,7 @@ for_window [class=".*"] split toggle
 # bindsym $mod+e layout toggle split 
 
 bindsym $mod+Tab exec --no-startup-id skippy-xd
+
+# avoid the mouse moving on the focused window. 
+# Useful for KDE top panel desktop switcher scrolling
+mouse_warping none
