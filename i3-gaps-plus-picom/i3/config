@@ -42,23 +42,23 @@ set $refresh_i3status killall -SIGUSR1 i3status
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec konsole
+bindsym $mod+Return exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+# bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # change focus
-bindsym $mod+j focus left
-bindsym $mod+k focus down
-bindsym $mod+l focus up
-bindsym $mod+ograve focus right
+bindsym $mod+a focus left
+bindsym $mod+s focus down
+bindsym $mod+w focus up
+bindsym $mod+d focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -89,7 +89,7 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 # bindsym $mod+s layout stacking
-bindsym $mod+w layout tabbed
+# bindsym $mod+w layout tabbed
 bindsym $mod+Alt+e layout toggle split
 
 # toggle tiling / floating
@@ -99,7 +99,7 @@ bindsym $mod+Shift+space floating toggle
 #bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+# bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -181,6 +181,7 @@ bindsym $mod+r mode "resize"
 # finds out, if available)
 bar {
 	id bar-1
+	output DisplayPort-0
         mode hide
         status_command i3status 
 	position top
@@ -190,6 +191,20 @@ bar {
           background #242424
         }
 }
+
+bar {
+	id bar-2
+	output HDMI-A-0
+        # mode hide
+        status_command i3status_aqi.sh
+	position top
+	modifier $mod
+        height 26
+        colors {
+          background #242424
+        }
+}
+
 
 # Plasma compatibility improvements
 for_window [window_role="pop-up"] floating enable
@@ -210,11 +225,6 @@ for_window [class="(?i)*nextcloud*"] floating disable
 for_window [class="plasmashell" window_type="notification"] floating enable, border none, move right 700px, move down 450px
 for_window [title="Desktop — Plasma"] kill; floating enable; border none
 no_focus [class="plasmashell" window_type="notification"] 
-
-exec_always export BG="/home/morro/Immagini/wallpapers/minimal-sunset-landscape-4k-w5.jpg"
-exec_always --no-startup-id wal -i /home/morro/Immagini/wallpapers/Minimal-Wallpaper-001.jpg
-# exec_always --no-startup-id feh --bg-scale /home/morro/Immagini/wallpapers/Minimal-Wallpaper-001.jpg
-# exec --no-startup-id wal -i /home/morro/Immagini/wallpapers/358221b85dc0c666cbd6bf4961a260db.jpg
 
 # exec_always --no-startup-id picom -bc
 exec_always picom -CG
@@ -277,8 +287,16 @@ mode "$mode_gaps_outer" {
         bindsym Escape mode "default"
 }
 
-workspace $ws1 output DP-4
-workspace $ws2 output HDMI-0
+workspace $ws1 output DisplayPort-0 HDMI-A-0
+workspace $ws2 output DisplayPort-0 HDMI-A-0
+workspace $ws3 output DisplayPort-0 HDMI-A-0
+workspace $ws4 output DisplayPort-0 HDMI-A-0
+workspace $ws5 output DisplayPort-0 HDMI-A-0
+workspace $ws6 output HDMI-A-0 DisplayPort-0
+workspace $ws7 output HDMI-A-0 DisplayPort-0
+workspace $ws8 output HDMI-A-0 DisplayPort-0
+workspace $ws9 output HDMI-A-0 DisplayPort-0
+workspace $ws0 output HDMI-A-0 DisplayPort-0
 
 # client.focused #555555 #555555 #ffffff #2e9ef4     #CC0000
 client.focused #555555 #555555 #555555 #555555 #555555
@@ -288,7 +306,7 @@ border_radius 5
 #start in opposite orientation from your monitor
 default_orientation vertical 
 #toggles split at each new window
-for_window [class=".*"] split toggle 
+# for_window [class=".*"] split toggle 
 #kill command resets the split
 # bindsym $mod+shift+q split toggle kill 
 # should already exist but use if split orientation  messes up
@@ -299,3 +317,20 @@ bindsym $mod+Tab exec --no-startup-id skippy-xd
 # avoid the mouse moving on the focused window. 
 # Useful for KDE top panel desktop switcher scrolling
 mouse_warping none
+
+# set wallpaper AFTER screen loading
+# exec_always --no-startup-id "sleep 1;wal -i /home/morro/Immagini/wallpapers/Minimal-Wallpaper-001.jpg"
+exec_always --no-startup-id "sleep 1;feh --bg-scale /home/morro/Immagini/wallpapers/Minimal-Wallpaper-001.jpg"
+
+exec_always --no-startup-id i3altlayout
+
+bindsym --release Mod1+w exec --no-startup-id xdotool key --clearmodifiers Up
+bindsym --release Mod1+a exec --no-startup-id xdotool key --clearmodifiers Left
+bindsym --release Mod1+s exec --no-startup-id xdotool key --clearmodifiers Down
+bindsym --release Mod1+d exec --no-startup-id xdotool key --clearmodifiers Right
+bindsym --release Mod1+c exec --no-startup-id xdotool key --clearmodifiers Return
+
+bindsym --release Mod1+z exec --no-startup-id xdotool key --clearmodifiers XF86Back
+bindsym --release Mod1+x exec --no-startup-id xdotool key --clearmodifiers XF86Forward
+
+bindsym Mod1+Tab workspace back_and_forth
