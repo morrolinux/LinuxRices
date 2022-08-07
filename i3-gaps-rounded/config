@@ -13,8 +13,8 @@ set $mod Mod4
 set $sup Mod4
 
 set $screen1 DP-4
-set $screen2 HDMI-0
-set $screen3 DVI-D-1
+set $screen2 DP-0
+set $screen3 HDMI-0
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
@@ -243,10 +243,10 @@ bar {
 bar {
 	id bar-2
 	output $screen2
-    # mode hide
+     	mode hide
         status_command i3status 
 	position top
-	modifier $mod
+	modifier Mod1
         height 26
         colors {
           background #242424
@@ -277,7 +277,8 @@ for_window [class="yakuake"] floating enable
 for_window [class="kruler"] floating enable
 for_window [class="systemsettings"] floating enable
 for_window [class="plasmashell"] floating enable;
-for_window [class="Plasma"] floating enable; border none
+for_window [class="Plasma"] floating enable; 
+# for_window [class="Plasma"] floating enable; border none
 for_window [title="plasma-desktop"] floating enable; border none
 for_window [title="win7"] floating enable; border none
 for_window [class="krunner"] floating enable; border none
@@ -294,6 +295,9 @@ no_focus [class="plasmashell" window_type="notification"]
 
 # Disable window titlebars entirely
 for_window [class="^.*"] border pixel 0
+
+assign [title="Quake3-UrT"] $ws12
+for_window [title="Quake3-UrT"] move right 955
 
 # Set inner/outer gaps
 gaps inner 10
@@ -354,7 +358,8 @@ mode "$mode_gaps_outer" {
 }
 
 # YouTube mode gaps
-bindsym $mod+Shift+y gaps outer all set 160; gaps vertical all set 90; gaps inner all set 10; gaps top all minus 30
+bindsym $mod+Shift+y gaps outer all set 180; gaps vertical all set 101; gaps inner all set 10
+# bindsym $mod+Shift+y gaps outer all set 180; gaps vertical all set 101; gaps inner all set 10; gaps top all minus 30
 
 workspace $ws1 output $screen1 $screen2
 workspace $ws2 output $screen1 $screen2 
@@ -419,9 +424,13 @@ bindsym --release Mod1+x exec --no-startup-id xdotool key --clearmodifiers XF86F
 bindsym Mod1+Tab workspace back_and_forth
 bindsym Shift+F2 exec i3-input -F 'rename workspace to "%s"' -P 'New name for this workspace: '
 
-set $bg "/home/morro/Pictures/wallpapers/blur-162.jpg"
+set $bg "/home/morro/Pictures/wallpapers/wp7969036-blurry-ultra-hd-wallpapers.jpg"
 
 exec_always --no-startup-id sleep 1;feh --bg-fill $bg ; ~/.local/bin/i3expod.py -w $bg 
 bindsym Mod1+Shift+b exec --no-startup-id hsetroot -solid "#000000"
 bindsym Mod1+Shift+w exec --no-startup-id feh --bg-fill $bg
 
+# https://github.com/jamcnaughton/hud-menu
+exec ~/i3-hud-menu/i3-appmenu-service.py
+bindsym Control+space exec --no-startup-id ~/i3-hud-menu/i3-hud-menu.py
+# bindsym $mod+x exec ~/i3-hud-menu/i3-hud-menu.py

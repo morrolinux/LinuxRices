@@ -1,0 +1,8 @@
+//@theme "/usr/share/rofi/themes/Adapta-Nokto.rasi"
+//@theme "/usr/share/rofi/themes/sidebar.rasi"
+@theme "/usr/share/rofi/themes/android_notification.rasi"
+
+window {
+location:	 center;
+anchor:		 center;
+}
