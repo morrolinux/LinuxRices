@@ -430,7 +430,8 @@ exec_always --no-startup-id sleep 1;feh --bg-fill $bg ; ~/.local/bin/i3expod.py 
 bindsym Mod1+Shift+b exec --no-startup-id hsetroot -solid "#000000"
 bindsym Mod1+Shift+w exec --no-startup-id feh --bg-fill $bg
 
-# https://github.com/jamcnaughton/hud-menu
+# https://github.com/morrolinux/i3-hud-menu
 exec ~/i3-hud-menu/i3-appmenu-service.py
-bindsym Control+space exec --no-startup-id ~/i3-hud-menu/i3-hud-menu.py
-# bindsym $mod+x exec ~/i3-hud-menu/i3-hud-menu.py
+bindsym Control+space exec ~/i3-hud-menu/hud-menu.py
+bindsym $mod+x exec ~/i3-hud-menu/hud-menu.py
+
