@@ -286,7 +286,7 @@ for_window [class="Kmix"] floating enable; border none
 for_window [class="Klipper"] floating enable; border none
 for_window [class="Plasmoidviewer"] floating enable; border none
 for_window [class="(?i)*nextcloud*"] floating disable
-for_window [class="plasmashell" window_type="notification"] floating enable, border none, move right 700px, move down 450px
+for_window [class="plasmashell" window_type="notification"] floating enable, border none, move position center
 for_window [title="Desktop — Plasma"] kill; floating enable; border none
 no_focus [class="plasmashell" window_type="notification"] 
 
@@ -300,7 +300,7 @@ assign [title="Quake3-UrT"] $ws12
 for_window [title="Quake3-UrT"] move right 955
 
 # Set inner/outer gaps
-gaps inner 10
+gaps inner 15
 gaps vertical 5
 # gaps outer -10
 # gaps vertical -30
@@ -434,4 +434,6 @@ bindsym Mod1+Shift+w exec --no-startup-id feh --bg-fill $bg
 exec ~/i3-hud-menu/i3-appmenu-service.py
 bindsym Control+space exec ~/i3-hud-menu/hud-menu.py
 bindsym $mod+x exec ~/i3-hud-menu/hud-menu.py
+# calculator
+bindsym $mod+c exec rofi -show calc -modi calc -no-show-match -no-sort
 
