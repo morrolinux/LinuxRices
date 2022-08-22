@@ -6,6 +6,8 @@ notification daemon: `dunst`
 
 audio eq: `easyeffects`
 
+eq presets: [use at your own risk](https://github.com/JackHack96/EasyEffects-Presets)
+
 audio controls: `pamixer`
 
 status bar: `waybar-hyprland-git`
