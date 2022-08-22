@@ -1,4 +1,9 @@
 # Font configuration
 font:
   # Point size
-  size: 14.0
+  size: 12.0
+
+key_bindings:
+  - { key: Return,   mods: Shift, action: SpawnNewInstance }
+
+

@@ -1,0 +1,1 @@
+Please read: https://github.com/hyprwm/Hyprland/wiki/Nvidia

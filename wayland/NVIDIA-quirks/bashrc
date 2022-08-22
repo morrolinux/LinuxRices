@@ -1,0 +1,3 @@
+# workaround for alacritty spawning a transparent window on waylad with NVIDIA drivers
+sleep 0.1 && echo -n
+
