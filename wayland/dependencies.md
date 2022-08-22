@@ -11,3 +11,6 @@ audio controls: `pamixer`
 status bar: `waybar-hyprland-git`
 
 background: `swaybg`
+
+wifi applet: `wofi-wifi.sh` (you can get it [here](https://raw.githubusercontent.com/cristobaltapia/dotfiles_sway/master/home/.config/wofi/scripts/wofi-wifi.sh) . `chmod +x` it and copy it to your PATH.
+
