@@ -1,1 +1,68 @@
 Please read: https://github.com/hyprwm/Hyprland/wiki/Nvidia
+
+Here's what works for me:
+
+1. Install nvidia proprietary userspace drivers (kernel space can be `nvidia` or `nvidia-open-dkms`, didn't really make a difference for me.
+
+2. ADD those modules to `/etc/mkinitcpio.conf`: `MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)` and rebuild your initcpio (`mkinitcpio -p linux` or similar)
+
+3. Set the a bunch of environment variables.
+
+Those must be set BEFORE launching the session, so you'd need to add a `.desktop` file like `/usr/share/wayland-sessions/hyprlad-nvidia.desktop`:
+```
+[Desktop Entry]
+Name=Hyprland (NVIDIA)
+Comment=Hyprland Compositing W.M. (NVIDIA Fixes)
+Exec=/usr/bin/hyprland-nvidia
+Type=Application
+
+```
+
+Where `/usr/bin/hyprland-nvidia` is something like:
+
+
+```
+# CREDITS: https://aur.archlinux.org/packages/sway-nvidia
+#!/usr/bin/env sh
+
+# Source profile (lifted from some gnome stuff)
+if [ "x$XDG_SESSION_TYPE" = "xwayland" ] &&
+   [ "x$XDG_SESSION_CLASS" != "xgreeter" ] &&
+   [  -n "$SHELL" ] &&
+   grep -q "$SHELL" /etc/shells &&
+   ! (echo "$SHELL" | grep -q "false") &&
+   ! (echo "$SHELL" | grep -q "nologin"); then
+  if [ "$1" != '-l' ]; then
+    exec bash -c "exec -l '$SHELL' -c '$0 -l $*'"
+  else
+    shift
+  fi
+fi
+
+# Source environment files
+for n in "/usr/share" "/usr/local/share"; do
+  [ -f "$n/wlroots-nvidia/wlroots-env-nvidia.sh" ] && . "$n/wlroots-nvidia/wlroots-env-nvidia.sh"
+  [ -f "$n/wlroots-nvidia/wlroots-env.sh" ] && . "$n/wlroots-nvidia/wlroots-env.sh"
+done
+
+exec Hyprland
+
+```
+
+and `/usr/share/wlroots-nvidia/wlroots-env-nvidia.sh` looks like this:
+
+```
+export LIBVA_DRIVER_NAME=nvidia
+export CLUTTER_BACKEND=wayland
+export XDG_SESSION_TYPE=wayland
+export QT_WAYLAND_DISABLE_WINDOWDECORATION=1
+export MOZ_ENABLE_WAYLAND=1
+export GBM_BACKEND=nvidia-drm
+export __GLX_VENDOR_LIBRARY_NAME=nvidia
+export WLR_NO_HARDWARE_CURSORS=1
+export WLR_BACKEND=vulkan
+export QT_QPA_PLATFORM=wayland
+export GDK_BACKEND=wayland
+```
+
+Reboot and you should be good to go.
