@@ -1,0 +1,13 @@
+[Unit]
+Description=Starts ydotoold service
+
+[Service]
+Type=simple
+Restart=always
+ExecStart=/usr/bin/ydotoold --socket-path="/run/user/1000/.ydotool_socket" --socket-own="1000:1000"
+ExecReload=/usr/bin/kill -HUP $MAINPID
+KillMode=process
+TimeoutSec=180
+
+[Install]
+WantedBy=default.target
