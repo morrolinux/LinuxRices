@@ -6,13 +6,13 @@
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
 
-    "modules-left": ["wlr/workspaces","hyprland/workspaces"],
+    "modules-left": ["hyprland/workspaces"],
 
     "modules-center": ["hyprland/window"],
 
     "modules-right": ["tray", "idle_inhibitor", "pulseaudio", "network", "temperature", "battery", "battery#bat2", "clock"],
 
-    "wlr/workspaces": {
+    "hyprland/workspaces": {
     	"format": "{name}: {icon}",
     	"format-icons": {
     		"urgent": "",
@@ -21,6 +21,8 @@
     		"default": ""
     	},
         "on-click": "activate",
+    	"on-scroll-up": "hyprctl dispatch workspace r-1",
+    	"on-scroll-down": "hyprctl dispatch workspace r+1",
     },
 
     // Modules configuration
